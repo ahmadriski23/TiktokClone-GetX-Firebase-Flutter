@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "121086657392",
+    "project_id": "vidscrollapp",
+    "storage_bucket": "vidscrollapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121086657392:android:f4ea3c9ae99ae06b3705b5",
+        "android_client_info": {
+          "package_name": "com.example.vidscroll_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121086657392-1061ds5ht1e1kppae7kop7c06hen8jul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgCVUT7mwp81m7XPCHz91_BN1VrO5JlgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121086657392-1061ds5ht1e1kppae7kop7c06hen8jul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
