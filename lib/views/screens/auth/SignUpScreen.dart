@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:vidscroll_app/views/screens/auth/LoginScreen.dart';
 
 import '../../../constant.dart';
 import '../../widgets/TextInputField.dart';
@@ -50,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
                     bottom: -10,
                     left: 80,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => authController.pickImage(),
                       icon: Icon(Icons.add_a_photo),
                     ),
                   )
@@ -112,7 +113,11 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => authController.registerUser(
+                      _usernameController.text,
+                      _emailController.text,
+                      _passwordController.text,
+                      authController.profilePhoto),
                   child: Center(
                     child: Text(
                       'Register',
@@ -137,7 +142,12 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
                     child: Text(
                       'Login',
                       style: TextStyle(fontSize: 20, color: buttonColor),
