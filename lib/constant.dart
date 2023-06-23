@@ -4,6 +4,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'controllers/AuthController.dart';
+import 'views/screens/AddVideoScreen.dart';
+
+const pages = [
+  Text('Home Screen'),
+  Text('Search Screen'),
+  AddVideoScreen(),
+  Text('Messages Screen'),
+  Text('Profile Screen'),
+];
 
 // COLORS
 const backgroundColor = Colors.black;
