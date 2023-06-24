@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'controllers/AuthController.dart';
 import 'views/screens/AddVideoScreen.dart';
+import 'views/screens/VideoScreen.dart';
 
 const pages = [
-  Text('Home Screen'),
+  VideoScreen(),
   Text('Search Screen'),
   AddVideoScreen(),
   Text('Messages Screen'),
