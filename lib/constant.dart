@@ -7,7 +7,7 @@ import 'controllers/AuthController.dart';
 import 'views/screens/AddVideoScreen.dart';
 import 'views/screens/VideoScreen.dart';
 
-const pages = [
+List pages = [
   VideoScreen(),
   Text('Search Screen'),
   AddVideoScreen(),
