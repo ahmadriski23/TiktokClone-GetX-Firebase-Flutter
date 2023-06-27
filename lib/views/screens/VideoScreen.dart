@@ -177,7 +177,9 @@ class VideoScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    CommentScreen()));
+                                                    CommentScreen(
+                                                      id: data.id,
+                                                    )));
                                       },
                                       child: Icon(Icons.comment,
                                           size: 40, color: Colors.white),
