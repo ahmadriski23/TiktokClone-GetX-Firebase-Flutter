@@ -19,15 +19,13 @@ class _CircleAnimationState extends State<CircleAnimation>
       vsync: this,
       duration: Duration(milliseconds: 5000),
     );
-    controller.repeat(reverse: true);
-
+    controller.repeat();
     controller.forward();
   }
 
   @override
   void dispose() {
     controller.dispose();
-
     super.dispose();
   }
 

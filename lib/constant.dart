@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 
 import 'controllers/AuthController.dart';
 import 'views/screens/AddVideoScreen.dart';
+import 'views/screens/SearchScreen.dart';
 import 'views/screens/VideoScreen.dart';
 
 List pages = [
   VideoScreen(),
-  Text('Search Screen'),
+  SearchScreen(),
   AddVideoScreen(),
   Text('Messages Screen'),
   Text('Profile Screen'),
