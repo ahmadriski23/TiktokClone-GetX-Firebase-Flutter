@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:vidscroll_app/models/user.dart';
 
 import '../../controllers/SearchController.dart';
+import 'ProfileScreen.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
@@ -42,7 +43,16 @@ class SearchScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     User user = searchController.searchedUsers[index];
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                              uid: user.uid,
+                            ),
+                          ),
+                        );
+                      },
                       child: ListTile(
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(
