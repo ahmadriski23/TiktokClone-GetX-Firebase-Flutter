@@ -13,7 +13,7 @@ List pages = [
   VideoScreen(),
   SearchScreen(),
   AddVideoScreen(),
-  Text('Messages Screen'),
+  Center(child: Text('Messages Screen')),
   ProfileScreen(uid: authController.user.uid),
 ];
 

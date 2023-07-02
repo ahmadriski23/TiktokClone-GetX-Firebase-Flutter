@@ -14,18 +14,61 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.red,
-            title: TextFormField(
-              decoration: InputDecoration(
-                  filled: false,
-                  hintText: 'Search',
-                  hintStyle: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  )),
-              onFieldSubmitted: (value) => searchController.searchUser(value),
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            backgroundColor: Colors.white,
+            title: Padding(
+              padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                  color: Color.fromARGB(255, 230, 224, 224),
+                ),
+                child: TextFormField(
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.mic,
+                      color: Colors.black,
+                    ),
+                    contentPadding: EdgeInsets.only(left: 10),
+                    border: InputBorder.none,
+                    filled: false,
+                    hintText: 'Bob Marley',
+                    hintStyle: TextStyle(fontSize: 18, color: Colors.black26),
+                  ),
+                  onFieldSubmitted: (value) =>
+                      searchController.searchUser(value),
+                ),
+              ),
             ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0, top: 5),
+                child: InkWell(
+                  onTap: () {
+                    _searchController(String value) {
+                      searchController.searchUser(value);
+                    }
+                  },
+                  child: Center(
+                    child: Text(
+                      'Search',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
           body: searchController.searchedUsers.isEmpty
               ? Center(
@@ -33,7 +76,7 @@ class SearchScreen extends StatelessWidget {
                     'Search for users!',
                     style: TextStyle(
                       fontSize: 25,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
