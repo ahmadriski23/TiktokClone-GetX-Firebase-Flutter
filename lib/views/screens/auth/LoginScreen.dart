@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vidscroll_app/views/screens/auth/SignUpScreen.dart';
 
-import '../../../constant.dart';
+import '../../../constant/constant.dart';
 import '../../widgets/TextInputField.dart';
 
 class LoginScreen extends StatelessWidget {

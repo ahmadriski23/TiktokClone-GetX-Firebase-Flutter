@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../../constant.dart';
+import '../../constant/constant.dart';
 
 class TextInputField extends StatelessWidget {
   final TextEditingController controller;

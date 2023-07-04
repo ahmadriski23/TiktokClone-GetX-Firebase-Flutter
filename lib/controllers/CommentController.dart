@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:vidscroll_app/constant.dart';
+import 'package:vidscroll_app/constant/constant.dart';
 
 import '../models/comment.dart';
 

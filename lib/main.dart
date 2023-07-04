@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'constant.dart';
+import 'constant/constant.dart';
 import 'controllers/AuthController.dart';
 import 'views/screens/auth/LoginScreen.dart';
 import 'views/screens/auth/SignUpScreen.dart';

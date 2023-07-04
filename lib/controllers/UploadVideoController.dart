@@ -3,7 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:video_compress/video_compress.dart';
 
-import '../constant.dart';
+import '../constant/constant.dart';
 import '../models/video.dart';
 
 class UploadVideoController extends GetxController {

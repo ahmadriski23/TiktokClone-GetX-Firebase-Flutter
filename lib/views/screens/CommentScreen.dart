@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../constant.dart';
+import '../../constant/constant.dart';
 import '../../controllers/CommentController.dart';
 import 'package:timeago/timeago.dart' as tago;
 

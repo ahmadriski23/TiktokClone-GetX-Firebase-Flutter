@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../constant.dart';
+import '../constant/constant.dart';
 import '../models/user.dart';
 
 class SearchController extends GetxController {

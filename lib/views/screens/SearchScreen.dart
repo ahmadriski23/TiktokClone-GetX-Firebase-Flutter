@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidscroll_app/models/user.dart';
 
+import '../../constant/TextService.dart';
 import '../../controllers/SearchController.dart';
 import 'ProfileScreen.dart';
 
@@ -27,6 +28,7 @@ class SearchScreen extends StatelessWidget {
                   color: Color.fromARGB(255, 230, 224, 224),
                 ),
                 child: TextFormField(
+                  style: TextStyle(color: Colors.black),
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
@@ -41,7 +43,8 @@ class SearchScreen extends StatelessWidget {
                     border: InputBorder.none,
                     filled: false,
                     hintText: 'Bob Marley',
-                    hintStyle: TextStyle(fontSize: 18, color: Colors.black26),
+                    hintStyle: TextService.mediumText
+                        .copyWith(fontSize: 16, color: Colors.black26),
                   ),
                   onFieldSubmitted: (value) =>
                       searchController.searchUser(value),
@@ -58,13 +61,9 @@ class SearchScreen extends StatelessWidget {
                     }
                   },
                   child: Center(
-                    child: Text(
-                      'Search',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 15,
-                      ),
-                    ),
+                    child: Text('Search',
+                        style: TextService.mediumText
+                            .copyWith(fontSize: 15, color: Colors.red)),
                   ),
                 ),
               )
@@ -74,42 +73,47 @@ class SearchScreen extends StatelessWidget {
               ? Center(
                   child: Text(
                     'Search for users!',
-                    style: TextStyle(
+                    style: TextService.mediumText.copyWith(
                       fontSize: 25,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 )
-              : ListView.builder(
-                  itemCount: searchController.searchedUsers.length,
-                  itemBuilder: (context, index) {
-                    User user = searchController.searchedUsers[index];
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProfileScreen(
-                              uid: user.uid,
+              : Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: ListView.builder(
+                      itemCount: searchController.searchedUsers.length,
+                      itemBuilder: (context, index) {
+                        User user = searchController.searchedUsers[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileScreen(
+                                  uid: user.uid,
+                                ),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                user.profilePhoto,
+                              ),
+                            ),
+                            title: Text(
+                              user.name,
+                              style: TextService.mediumText.copyWith(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         );
-                      },
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            user.profilePhoto,
-                          ),
-                        ),
-                        title: Text(user.name,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                            )),
-                      ),
-                    );
-                  }));
+                      }),
+                ));
     });
   }
 }

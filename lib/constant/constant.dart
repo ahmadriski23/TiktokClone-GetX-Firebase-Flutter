@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
-import 'controllers/AuthController.dart';
-import 'views/screens/AddVideoScreen.dart';
-import 'views/screens/ProfileScreen.dart';
-import 'views/screens/SearchScreen.dart';
-import 'views/screens/VideoScreen.dart';
+import '../controllers/AuthController.dart';
+import '../views/screens/AddVideoScreen.dart';
+import '../views/screens/ProfileScreen.dart';
+import '../views/screens/SearchScreen.dart';
+import '../views/screens/VideoScreen.dart';
 
 List pages = [
   VideoScreen(),
@@ -21,6 +21,7 @@ List pages = [
 const backgroundColor = Colors.black;
 var buttonColor = Colors.red[400];
 const borderColor = Colors.grey;
+const whiteColor = Colors.white;
 
 // FIREBASE
 var firebaseAuth = FirebaseAuth.instance;

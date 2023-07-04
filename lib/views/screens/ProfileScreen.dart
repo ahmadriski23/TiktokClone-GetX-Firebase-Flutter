@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../constant.dart';
+import '../../constant/TextService.dart';
+import '../../constant/constant.dart';
 import '../../controllers/ProfileController.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -28,28 +30,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
         init: ProfileController(),
         builder: (controller) {
           if (controller.user.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: LoadingAnimationWidget.flickr(
+                  leftDotColor: Colors.white,
+                  rightDotColor: Colors.red,
+                  size: 25),
             );
           }
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               centerTitle: true,
               title: Text(
                 controller.user['name'],
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: TextService.boldText.copyWith(fontSize: 15),
               ),
               backgroundColor: Colors.black,
-              leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(Icons.arrow_back)),
+              leading: widget.uid == authController.user.uid
+                  ? InkWell(onTap: () {}, child: Icon(Icons.attach_money))
+                  : InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.arrow_back)),
               actions: [
-                Icon(Icons.more_horiz),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Icon(Icons.more_horiz),
+                ),
               ],
             ),
             body: SafeArea(
@@ -83,58 +91,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               Text(
                                 controller.user['following'],
-                                style: TextStyle(
-                                  fontSize: 20,
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 'Following',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 12,
+                                  color: Colors.white38,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            width: 15,
+                            width: 60,
                           ),
                           Column(
                             children: [
                               Text(
                                 controller.user['followers'],
-                                style: TextStyle(
-                                  fontSize: 20,
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 'Followers',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 12,
+                                  color: Colors.white38,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            width: 15,
+                            width: 60,
                           ),
                           Column(
                             children: [
                               Text(
                                 controller.user['likes'],
-                                style: TextStyle(
-                                  fontSize: 20,
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 'Likes',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 12,
+                                  color: Colors.white38,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
@@ -152,25 +163,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.black12,
                         )),
                         child: Center(
-                          child: InkWell(
-                            onTap: () {
-                              if (widget.uid == authController.user.uid) {
-                                authController.signOut();
-                              } else {
-                                controller.followUser();
-                              }
-                            },
-                            child: Text(
-                              widget.uid == authController.user.uid
-                                  ? 'Sign Out'
-                                  : controller.user['isFollowing']
-                                      ? 'Unfollow'
-                                      : 'Follow',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                          child: Container(
+                            width: 250,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                if (widget.uid == authController.user.uid) {
+                                  authController.signOut();
+                                } else {
+                                  controller.followUser();
+                                }
+                              },
+                              child: Center(
+                                child: Text(
+                                  widget.uid == authController.user.uid
+                                      ? 'Sign Out'
+                                      : controller.user['isFollowing']
+                                          ? 'Unfollow'
+                                          : 'Follow',
+                                  style: TextService.boldText.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                       GridView.builder(
                           shrinkWrap: true,
@@ -188,7 +212,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               imageUrl: thumbnail,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
+                                  LoadingAnimationWidget.flickr(
+                                      leftDotColor: Colors.white,
+                                      rightDotColor: Colors.red,
+                                      size: 15),
                               errorWidget: (context, url, error) =>
                                   Icon(Icons.error),
                             );

@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vidscroll_app/views/screens/auth/LoginScreen.dart';
-import '../constant.dart';
+import '../constant/constant.dart';
 import 'package:vidscroll_app/models/user.dart' as model;
 
 import '../views/screens/HomeScreen.dart';

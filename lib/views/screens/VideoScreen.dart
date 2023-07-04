@@ -1,42 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant.dart';
+import '../../constant/TextService.dart';
+import '../../constant/constant.dart';
+import '../../controllers/SearchController.dart';
 import '../../controllers/VideoController.dart';
+import '../../models/user.dart';
 import '../widgets/CircleAnimation.dart';
 import '../widgets/VideoPlayerItem.dart';
 import 'CommentScreen.dart';
+import 'ProfileScreen.dart';
 
 class VideoScreen extends StatelessWidget {
   VideoScreen({super.key});
 
   final VideoController videoController = Get.put(VideoController());
+  final SearchController searchController = Get.put(SearchController());
 
-  buildProfile(String profilePhoto) {
-    return SizedBox(
-      width: 60,
-      height: 60,
-      child: Stack(
-        children: [
-          Positioned(
-              left: 5,
-              child: Container(
-                width: 50,
-                height: 50,
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Image(
-                    image: NetworkImage(profilePhoto),
-                    fit: BoxFit.cover,
+  buildProfile(BuildContext context, String uid, String profilePhoto) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(uid: uid),
+          ),
+        );
+      },
+      child: SizedBox(
+        width: 60,
+        height: 60,
+        child: Stack(
+          children: [
+            Positioned(
+                left: 5,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  padding: EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                ),
-              ))
-        ],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image(
+                      image: NetworkImage(profilePhoto),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }
@@ -54,7 +69,7 @@ class VideoScreen extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               gradient: LinearGradient(
-                colors: [Colors.grey, Colors.white],
+                colors: [Colors.grey, whiteColor],
               ),
             ),
             child: ClipRRect(
@@ -105,33 +120,20 @@ class VideoScreen extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    data.username,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    data.caption,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
+                                  Text(data.username,
+                                      style: TextService.boldText.copyWith()),
+                                  SizedBox(height: 8),
+                                  Text(data.caption,
+                                      style: TextService.mediumText.copyWith()),
+                                  SizedBox(height: 12),
                                   Row(
                                     children: [
                                       Icon(Icons.music_note,
-                                          size: 20, color: Colors.white),
+                                          size: 20, color: whiteColor),
                                       Text(
                                         data.songName,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                        ),
+                                        style:
+                                            TextService.mediumText.copyWith(),
                                       ),
                                     ],
                                   )
@@ -147,7 +149,8 @@ class VideoScreen extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  buildProfile(data.profilePhoto),
+                                  buildProfile(
+                                      context, data.uid, data.profilePhoto),
                                   SizedBox(
                                     height: 15,
                                   ),
@@ -161,18 +164,16 @@ class VideoScreen extends StatelessWidget {
                                             color: data.likes.contains(
                                                     authController.user.uid)
                                                 ? Colors.red
-                                                : Colors.white),
+                                                : whiteColor),
                                       ),
                                       SizedBox(
-                                        height: 7,
+                                        height: 5,
                                       ),
-                                      Text(
-                                        data.likes.length.toString(),
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      )
+                                      Text(data.likes.length.toString(),
+                                          style: TextService.mediumText
+                                              .copyWith(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600))
                                     ],
                                   ),
                                   SizedBox(
@@ -191,18 +192,16 @@ class VideoScreen extends StatelessWidget {
                                                       )));
                                         },
                                         child: Icon(Icons.comment,
-                                            size: 40, color: Colors.white),
+                                            size: 40, color: whiteColor),
                                       ),
                                       SizedBox(
-                                        height: 7,
+                                        height: 5,
                                       ),
-                                      Text(
-                                        data.commentCount.toString(),
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      )
+                                      Text(data.commentCount.toString(),
+                                          style: TextService.mediumText
+                                              .copyWith(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600))
                                     ],
                                   ),
                                   SizedBox(
@@ -213,18 +212,16 @@ class VideoScreen extends StatelessWidget {
                                       InkWell(
                                         onTap: () {},
                                         child: Icon(Icons.reply,
-                                            size: 40, color: Colors.white),
+                                            size: 40, color: whiteColor),
                                       ),
                                       SizedBox(
-                                        height: 7,
+                                        height: 5,
                                       ),
-                                      Text(
-                                        data.shareCount.toString(),
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      )
+                                      Text(data.shareCount.toString(),
+                                          style: TextService.mediumText
+                                              .copyWith(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600))
                                     ],
                                   ),
                                   SizedBox(
