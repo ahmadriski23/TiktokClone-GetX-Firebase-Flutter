@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:vidscroll_app/views/screens/auth/LoginScreen.dart';
-
-import '../../constant/constant.dart';
-import '../widgets/CustomIcon.dart';
+part of 'ScreensImport.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

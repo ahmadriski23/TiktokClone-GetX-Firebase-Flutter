@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'WidgetsImport.dart';
 
 class CircleAnimation extends StatefulWidget {
   final Widget child;

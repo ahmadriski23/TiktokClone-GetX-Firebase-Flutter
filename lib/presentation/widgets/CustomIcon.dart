@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+part of 'WidgetsImport.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon({super.key});

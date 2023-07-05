@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vidscroll_app/views/screens/auth/LoginScreen.dart';
-import '../constant/constant.dart';
-import 'package:vidscroll_app/models/user.dart' as model;
+import '../../core/constant/Constant.dart';
+import 'package:vidscroll_app/data/models/user.dart' as model;
 
-import '../views/screens/HomeScreen.dart';
+import '../../presentation/screens/ScreensImport.dart';
+import '../../presentation/screens/auth/AuthImport.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();

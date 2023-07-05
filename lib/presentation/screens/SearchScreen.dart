@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:vidscroll_app/models/user.dart';
-
-import '../../constant/TextService.dart';
-import '../../controllers/SearchController.dart';
-import 'ProfileScreen.dart';
+part of 'ScreensImport.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});

@@ -1,11 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../../constant/TextService.dart';
-import '../../constant/constant.dart';
-import '../../controllers/ProfileController.dart';
+part of 'ScreensImport.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String uid;

@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:vidscroll_app/views/screens/auth/SignUpScreen.dart';
-
-import '../../../constant/constant.dart';
-import '../../widgets/TextInputField.dart';
+part of 'AuthImport.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});

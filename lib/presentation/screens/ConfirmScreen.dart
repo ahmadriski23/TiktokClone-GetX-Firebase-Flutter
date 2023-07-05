@@ -1,12 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
-
-import '../../controllers/UploadVideoController.dart';
-import '../widgets/TextInputField.dart';
+part of 'ScreensImport.dart';
 
 class ConfirmScreen extends StatefulWidget {
   final File videoFile;

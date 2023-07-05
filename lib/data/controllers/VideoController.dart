@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:vidscroll_app/models/video.dart';
+import 'package:vidscroll_app/data/models/video.dart';
 
-import '../constant/constant.dart';
+import '../../core/constant/Constant.dart';
 
 class VideoController extends GetxController {
   final Rx<List<Video>> _videoList = Rx<List<Video>>([]);

@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../constant/TextService.dart';
-import '../../constant/constant.dart';
-import '../../controllers/SearchController.dart';
-import '../../controllers/VideoController.dart';
-import '../../models/user.dart';
-import '../widgets/CircleAnimation.dart';
-import '../widgets/VideoPlayerItem.dart';
-import 'CommentScreen.dart';
-import 'ProfileScreen.dart';
+part of 'ScreensImport.dart';
 
 class VideoScreen extends StatelessWidget {
   VideoScreen({super.key});
@@ -98,7 +87,7 @@ class VideoScreen extends StatelessWidget {
               final data = videoController.videoList[index];
               return Stack(
                 children: [
-                  VideoPlayerItem(
+                  VideoPlayerItems(
                     videoUrl: data.videoUrl,
                   ),
                   Column(

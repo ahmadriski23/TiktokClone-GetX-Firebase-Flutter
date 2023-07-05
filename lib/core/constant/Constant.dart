@@ -2,12 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-
-import '../controllers/AuthController.dart';
-import '../views/screens/AddVideoScreen.dart';
-import '../views/screens/ProfileScreen.dart';
-import '../views/screens/SearchScreen.dart';
-import '../views/screens/VideoScreen.dart';
+import '../../data/controllers/AuthController.dart';
+import '../../presentation/screens/ScreensImport.dart';
 
 List pages = [
   VideoScreen(),
