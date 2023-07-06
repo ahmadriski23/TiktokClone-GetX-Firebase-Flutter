@@ -17,10 +17,9 @@ class _CircleAnimationState extends State<CircleAnimation>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 5000),
+      duration: Duration(milliseconds: 2500),
     );
     controller.repeat();
-    controller.forward();
   }
 
   @override

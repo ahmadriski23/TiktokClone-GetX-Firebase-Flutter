@@ -20,9 +20,7 @@ import '../../data/controllers/VideoController.dart';
 // Import Widgets
 import '../widgets/WidgetsImport.dart';
 
-// Import Screen
-
-// Import Data
+// Import Models
 import 'package:vidscroll_app/data/models/user.dart';
 
 // Import Constant

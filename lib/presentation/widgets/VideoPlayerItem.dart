@@ -48,13 +48,16 @@ class _VideoPlayerItemsState extends State<VideoPlayerItems> {
               });
             },
             child: AspectRatio(
-              aspectRatio: videoPlayerController.value.aspectRatio,
+              aspectRatio: 9 / 16,
               child: Stack(
                 children: [
                   VideoPlayer(videoPlayerController),
                   _ControlsOverlay(controller: videoPlayerController),
-                  VideoProgressIndicator(videoPlayerController,
-                      allowScrubbing: true),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: VideoProgressIndicator(videoPlayerController,
+                        allowScrubbing: true),
+                  ),
                 ],
               ),
             ),
@@ -97,22 +100,31 @@ class _ControlsOverlay extends StatelessWidget {
     return Stack(
       children: <Widget>[
         AnimatedSwitcher(
-          duration: const Duration(milliseconds: 50),
-          reverseDuration: const Duration(milliseconds: 200),
-          child: controller.value.isPlaying
-              ? const SizedBox.shrink()
-              : Container(
-                  color: Colors.black26,
-                  child: const Center(
-                    child: Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 100.0,
-                      semanticLabel: 'Play',
+            duration: const Duration(milliseconds: 50),
+            reverseDuration: const Duration(milliseconds: 200),
+            child: controller.value.isPlaying
+                ? Container(
+                    color: Colors.black26,
+                    child: const Center(
+                      child: Icon(
+                        Icons.play_arrow,
+                        color: Colors.white38,
+                        size: 50.0,
+                        semanticLabel: 'Play',
+                      ),
                     ),
-                  ),
-                ),
-        ),
+                  )
+                : Container(
+                    color: Colors.black26,
+                    child: const Center(
+                      child: Icon(
+                        Icons.pause,
+                        color: Colors.white38,
+                        size: 20.0,
+                        semanticLabel: 'Pause',
+                      ),
+                    ),
+                  )),
         GestureDetector(
           onTap: () {
             controller.value.isPlaying ? controller.pause() : controller.play();
@@ -131,7 +143,9 @@ class _ControlsOverlay extends StatelessWidget {
                 for (final Duration offsetDuration in _exampleCaptionOffsets)
                   PopupMenuItem<Duration>(
                     value: offsetDuration,
-                    child: Text('${offsetDuration.inMilliseconds}ms'),
+                    child: Text(
+                      '${offsetDuration.inMilliseconds}ms',
+                    ),
                   )
               ];
             },
@@ -160,7 +174,9 @@ class _ControlsOverlay extends StatelessWidget {
                 for (final double speed in _examplePlaybackRates)
                   PopupMenuItem<double>(
                     value: speed,
-                    child: Text('${speed}x'),
+                    child: Text(
+                      '${speed}x',
+                    ),
                   )
               ];
             },
@@ -172,7 +188,12 @@ class _ControlsOverlay extends StatelessWidget {
                 vertical: 12,
                 horizontal: 16,
               ),
-              child: Text('${controller.value.playbackSpeed}x'),
+              child: Text(
+                '${controller.value.playbackSpeed}x',
+                style: TextStyle(
+                  color: Colors.transparent,
+                ),
+              ),
             ),
           ),
         ),
