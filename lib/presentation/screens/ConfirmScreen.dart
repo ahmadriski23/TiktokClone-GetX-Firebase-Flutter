@@ -42,6 +42,22 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: InkWell(
+              onTap: () {
+                Navigator.of(context).pop;
+              },
+              child: Icon(
+                Icons.cancel,
+                size: 40,
+              )),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -50,7 +66,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 1.5,
+              height: MediaQuery.of(context).size.height / 1.7,
               child: VideoPlayer(controller),
             ),
             const SizedBox(
@@ -91,7 +107,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                           _captionController.text,
                           widget.videoPath),
                       child: const Text(
-                        'Share!',
+                        'Upload!',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,

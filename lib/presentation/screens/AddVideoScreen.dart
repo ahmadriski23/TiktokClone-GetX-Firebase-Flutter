@@ -3,6 +3,53 @@ part of 'ScreensImport.dart';
 class AddVideoScreen extends StatelessWidget {
   const AddVideoScreen({super.key});
 
+  addVideoBottomSheet(BuildContext ctx) {
+    final size = MediaQuery.of(ctx).size;
+    showModalBottomSheet(
+      backgroundColor: Colors.black,
+      context: ctx,
+      builder: (ctx) => Container(
+        height: 150,
+        width: size.width,
+        decoration: BoxDecoration(
+          color: Colors.grey[850],
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.white54,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                pickVideo(ImageSource.gallery, ctx);
+              },
+              leading: Icon(Icons.image),
+              title: Text('Choose from gallery'),
+            ),
+            ListTile(
+              onTap: () {
+                pickVideo(ImageSource.camera, ctx);
+              },
+              leading: Icon(Icons.camera_alt),
+              title: Text('Open camera'),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   pickVideo(ImageSource src, BuildContext context) async {
     final video = await ImagePicker().pickVideo(source: src);
     if (video != null) {
@@ -77,15 +124,16 @@ class AddVideoScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext ctx) {
     return Scaffold(
       body: Center(
         child: InkWell(
-          onTap: () => showOptionsDialog(context),
+          onTap: () => addVideoBottomSheet(ctx),
           child: Container(
             height: 50,
             width: 190,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
               color: buttonColor,
             ),
             child: Center(
