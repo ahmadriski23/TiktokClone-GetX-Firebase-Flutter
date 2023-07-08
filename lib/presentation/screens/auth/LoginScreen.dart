@@ -9,23 +9,36 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Vidscroll App',
-                style: TextStyle(
-                  fontSize: 35,
-                  color: buttonColor,
-                  fontWeight: FontWeight.w900,
-                ),
+              Container(
+                height: 150,
+                width: 275,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/img/logo_remove.png'))),
               ),
               Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 25,
+                'Welcome to Vidscroll',
+                style: TextService.boldText.copyWith(
+                  fontSize: 22,
+                  color: buttonColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Lets Login',
+                style: TextService.mediumText.copyWith(
+                  fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                 ),
@@ -68,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: buttonColor,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+                    Radius.circular(35),
                   ),
                 ),
                 child: InkWell(
@@ -77,24 +90,25 @@ class LoginScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Login',
-                      style: TextStyle(
+                      style: TextService.mediumText.copyWith(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20,
+                        fontSize: 15,
                       ),
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: 18,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Don\'t have an account? ',
-                    style: TextStyle(
-                      fontSize: 20,
+                    style: TextService.mediumText.copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
                     ),
                   ),
                   InkWell(
@@ -106,7 +120,11 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: Text(
                       'Register',
-                      style: TextStyle(fontSize: 20, color: buttonColor),
+                      style: TextService.mediumText.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        color: Colors.red,
+                      ),
                     ),
                   )
                 ],

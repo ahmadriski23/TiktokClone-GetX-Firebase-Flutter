@@ -126,6 +126,12 @@ class AddVideoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        elevation: 1,
+        title: Text('New Vids',
+            style: TextService.boldText.copyWith(fontSize: 18)),
+      ),
       body: Center(
         child: InkWell(
           onTap: () => addVideoBottomSheet(ctx),

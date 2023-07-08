@@ -12,7 +12,27 @@ class CommentScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     commentController.updatePostId(id);
     return Scaffold(
-      body: SingleChildScrollView(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: backgroundColor,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back)),
+        elevation: 0,
+        title: Text(
+          "Comments",
+          style: TextService.boldText.copyWith(
+            fontSize: 14,
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: SizedBox(
           width: size.width,
           height: size.height,
@@ -24,59 +44,92 @@ class CommentScreen extends StatelessWidget {
                     itemCount: commentController.comments.length,
                     itemBuilder: (context, index) {
                       final comment = commentController.comments[index];
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.black,
-                          backgroundImage: NetworkImage(comment.profilePhoto),
-                        ),
-                        title: Row(
-                          children: [
-                            Text(
-                              "${comment.username}  ",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.red,
-                                fontWeight: FontWeight.w700,
-                              ),
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: ListTile(
+                          leading: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProfileScreen(uid: comment.uid),
+                                ),
+                              );
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              backgroundImage:
+                                  NetworkImage(comment.profilePhoto),
                             ),
-                            Text(
-                              comment.comment,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${comment.username}  ",
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 14,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        subtitle: Row(
-                          children: [
-                            Text(
-                              tago.format(comment.datePublished.toDate()),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
+                            ],
+                          ),
+                          subtitle: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                comment.comment,
+                                style: TextService.mediumText.copyWith(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${comment.likes.length} likes',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
+                              SizedBox(height: 5),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      tago.format(
+                                          comment.datePublished.toDate()),
+                                      style: TextService.mediumText.copyWith(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                        trailing: InkWell(
-                          onTap: () =>
-                              commentController.likeComment(comment.id),
-                          child: Icon(
-                            Icons.favorite,
-                            size: 25,
-                            color:
-                                comment.likes.contains(authController.user.uid)
-                                    ? Colors.red
-                                    : Colors.white,
+                            ],
+                          ),
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () =>
+                                    commentController.likeComment(comment.id),
+                                child: Icon(
+                                  Icons.favorite,
+                                  size: 25,
+                                  color: comment.likes
+                                          .contains(authController.user.uid)
+                                      ? Colors.red
+                                      : Colors.white,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                '${comment.likes.length}',
+                                style: TextService.mediumText.copyWith(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       );
@@ -88,26 +141,16 @@ class CommentScreen extends StatelessWidget {
               ListTile(
                 title: TextFormField(
                   controller: _commentController,
-                  style: TextStyle(
-                    fontSize: 16,
+                  style: TextService.mediumText.copyWith(
+                    fontSize: 14,
                     color: Colors.white,
                   ),
                   decoration: InputDecoration(
-                    labelText: 'Comment',
-                    labelStyle: TextStyle(
-                      fontSize: 20,
+                    border: InputBorder.none,
+                    hintText: 'Comment',
+                    hintStyle: TextService.mediumText.copyWith(
+                      fontSize: 15,
                       color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
                     ),
                   ),
                 ),
@@ -116,8 +159,8 @@ class CommentScreen extends StatelessWidget {
                         commentController.postComment(_commentController.text),
                     child: Text(
                       'Send',
-                      style: TextStyle(
-                        fontSize: 16,
+                      style: TextService.mediumText.copyWith(
+                        fontSize: 14,
                         color: Colors.white,
                       ),
                     )),

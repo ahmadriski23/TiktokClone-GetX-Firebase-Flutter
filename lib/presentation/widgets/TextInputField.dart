@@ -16,19 +16,22 @@ class TextInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      autofocus: true,
       controller: controller,
       decoration: InputDecoration(
           labelText: labelText,
           prefixIcon: Icon(icon),
-          labelStyle: TextStyle(fontSize: 20),
+          labelStyle: TextService.mediumText.copyWith(
+            fontSize: 15,
+          ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(35),
             borderSide: BorderSide(
               color: borderColor,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(35),
               borderSide: BorderSide(
                 color: borderColor,
               ))),

@@ -45,7 +45,7 @@ class AuthController extends GetxController {
     _pickedImage = Rx<File?>(File(pickedImage!.path));
   }
 
-  /// upload to firebase storage
+  // upload to firebase storage
   Future<String> _uploadToStorage(File image) async {
     Reference ref = firebaseStorage
         .ref()

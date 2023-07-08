@@ -57,30 +57,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipOval(
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: controller.user['profilePhoto'],
-                              height: 100,
-                              width: 100,
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
+                      ClipOval(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: controller.user['profilePhoto'],
+                          height: 100,
+                          width: 100,
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Column(
                             children: [
                               Text(
                                 controller.user['following'],
@@ -99,10 +100,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            width: 60,
-                          ),
-                          Column(
+                        ),
+                        SizedBox(
+                          width: 60,
+                        ),
+                        Container(
+                          child: Column(
                             children: [
                               Text(
                                 controller.user['followers'],
@@ -121,10 +124,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            width: 60,
-                          ),
-                          Column(
+                        ),
+                        SizedBox(
+                          width: 60,
+                        ),
+                        Container(
+                          child: Column(
                             children: [
                               Text(
                                 controller.user['likes'],
@@ -143,78 +148,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        width: 140,
-                        height: 47,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: 140,
+                    height: 47,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                      color: Colors.black12,
+                    )),
+                    child: Center(
+                      child: Container(
+                        width: 250,
+                        height: 45,
                         decoration: BoxDecoration(
-                            border: Border.all(
-                          color: Colors.black12,
-                        )),
-                        child: Center(
-                          child: Container(
-                            width: 250,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                if (widget.uid == authController.user.uid) {
-                                  authController.signOut();
-                                } else {
-                                  controller.followUser();
-                                }
-                              },
-                              child: Center(
-                                child: Text(
-                                  widget.uid == authController.user.uid
-                                      ? 'Sign Out'
-                                      : controller.user['isFollowing']
-                                          ? 'Unfollow'
-                                          : 'Follow',
-                                  style: TextService.boldText.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            if (widget.uid == authController.user.uid) {
+                              authController.signOut();
+                            } else {
+                              controller.followUser();
+                            }
+                          },
+                          child: Center(
+                            child: Text(
+                              widget.uid == authController.user.uid
+                                  ? 'Sign Out'
+                                  : controller.user['isFollowing']
+                                      ? 'Unfollow'
+                                      : 'Follow',
+                              style: TextService.boldText.copyWith(
+                                  fontSize: 12, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: controller.user['thumbnails'].length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1,
-                                  crossAxisSpacing: 5),
-                          itemBuilder: (context, index) {
-                            String thumbnail =
-                                controller.user['thumbnails'][index];
-                            return CachedNetworkImage(
-                              imageUrl: thumbnail,
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) =>
-                                  LoadingAnimationWidget.flickr(
-                                      leftDotColor: Colors.white,
-                                      rightDotColor: Colors.red,
-                                      size: 15),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            );
-                          })
-                    ],
-                  )
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: controller.user['thumbnails'].length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1,
+                          crossAxisSpacing: 5),
+                      itemBuilder: (context, index) {
+                        String thumbnail = controller.user['thumbnails'][index];
+                        return CachedNetworkImage(
+                          imageUrl: thumbnail,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              LoadingAnimationWidget.flickr(
+                                  leftDotColor: Colors.white,
+                                  rightDotColor: Colors.red,
+                                  size: 15),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        );
+                      })
                 ],
               ),
             )),
