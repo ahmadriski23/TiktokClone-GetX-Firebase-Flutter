@@ -15,6 +15,6 @@ class TextService {
       textStyle: TextStyle(
     color: whiteColor,
     fontSize: 17,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
   ));
 }

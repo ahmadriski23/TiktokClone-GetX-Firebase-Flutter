@@ -116,11 +116,14 @@ class VideoScreen extends StatelessWidget {
                                     Text(data.caption,
                                         style:
                                             TextService.mediumText.copyWith()),
-                                    SizedBox(height: 12),
+                                    SizedBox(height: 11),
                                     Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Icon(Icons.music_note,
                                             size: 20, color: whiteColor),
+                                        SizedBox(width: 5),
                                         Text(
                                           data.songName,
                                           style:
@@ -133,7 +136,6 @@ class VideoScreen extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              width: 100,
                               margin: EdgeInsets.only(top: size.height / 5),
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -151,19 +153,19 @@ class VideoScreen extends StatelessWidget {
                                           onTap: () => videoController
                                               .likeVideo(data.id),
                                           child: Icon(Icons.favorite,
-                                              size: 40,
+                                              size: 35,
                                               color: data.likes.contains(
                                                       authController.user.uid)
                                                   ? Colors.red
                                                   : whiteColor),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 2,
                                         ),
                                         Text(data.likes.length.toString(),
                                             style: TextService.mediumText
                                                 .copyWith(
-                                                    fontSize: 12,
+                                                    fontSize: 11,
                                                     fontWeight:
                                                         FontWeight.w600))
                                       ],
@@ -184,15 +186,15 @@ class VideoScreen extends StatelessWidget {
                                                         )));
                                           },
                                           child: Icon(Icons.comment,
-                                              size: 40, color: whiteColor),
+                                              size: 35, color: whiteColor),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 2,
                                         ),
                                         Text(data.commentCount.toString(),
                                             style: TextService.mediumText
                                                 .copyWith(
-                                                    fontSize: 12,
+                                                    fontSize: 11,
                                                     fontWeight:
                                                         FontWeight.w600))
                                       ],
@@ -205,15 +207,15 @@ class VideoScreen extends StatelessWidget {
                                         InkWell(
                                           onTap: () {},
                                           child: Icon(Icons.reply,
-                                              size: 40, color: whiteColor),
+                                              size: 35, color: whiteColor),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 2,
                                         ),
                                         Text(data.shareCount.toString(),
                                             style: TextService.mediumText
                                                 .copyWith(
-                                                    fontSize: 12,
+                                                    fontSize: 11,
                                                     fontWeight:
                                                         FontWeight.w600))
                                       ],

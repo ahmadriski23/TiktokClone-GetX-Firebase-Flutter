@@ -37,30 +37,22 @@ class _VideoPlayerItemsState extends State<VideoPlayerItems> {
       decoration: BoxDecoration(
         color: Colors.black,
       ),
-      child: Column(
+      child: Stack(
         children: [
           InkWell(
-            onTap: () {
-              setState(() {
-                videoPlayerController.value.isPlaying
-                    ? videoPlayerController.pause()
-                    : videoPlayerController.play();
-              });
-            },
-            child: AspectRatio(
-              aspectRatio: 9 / 16,
-              child: Stack(
-                children: [
-                  VideoPlayer(videoPlayerController),
-                  _ControlsOverlay(controller: videoPlayerController),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: VideoProgressIndicator(videoPlayerController,
-                        allowScrubbing: true),
-                  ),
-                ],
-              ),
-            ),
+              onTap: () {
+                setState(() {
+                  videoPlayerController.value.isPlaying
+                      ? videoPlayerController.pause()
+                      : videoPlayerController.play();
+                });
+              },
+              child: VideoPlayer(videoPlayerController)),
+          // _ControlsOverlay(controller: videoPlayerController),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: VideoProgressIndicator(videoPlayerController,
+                allowScrubbing: true),
           ),
         ],
       ),

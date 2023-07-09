@@ -70,7 +70,7 @@ class CommentScreen extends StatelessWidget {
                                 "${comment.username}  ",
                                 style: TextService.boldText.copyWith(
                                   fontSize: 14,
-                                  color: Colors.red,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
