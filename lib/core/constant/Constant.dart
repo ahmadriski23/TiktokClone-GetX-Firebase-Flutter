@@ -6,7 +6,7 @@ import '../../data/controllers/AuthController.dart';
 import '../../presentation/screens/ScreensImport.dart';
 
 List pages = [
-  VideoScreen(),
+  VideoScreen(uid: authController.user.uid),
   SearchScreen(),
   AddVideoScreen(),
   Center(child: Text('Messages Screen')),

@@ -44,95 +44,106 @@ class CommentScreen extends StatelessWidget {
                     itemCount: commentController.comments.length,
                     itemBuilder: (context, index) {
                       final comment = commentController.comments[index];
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: ListTile(
-                          leading: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProfileScreen(uid: comment.uid),
-                                ),
-                              );
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: Colors.black,
-                              backgroundImage:
-                                  NetworkImage(comment.profilePhoto),
-                            ),
-                          ),
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${comment.username}  ",
-                                style: TextService.boldText.copyWith(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                      return commentController.comments.isEmpty
+                          ? Center(
+                              child: Text(
+                              'Be the first to comment',
+                              style: TextService.boldText.copyWith(
+                                fontSize: 14,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
                               ),
-                            ],
-                          ),
-                          subtitle: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                comment.comment,
-                                style: TextService.mediumText.copyWith(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
+                            ))
+                          : Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: ListTile(
+                                leading: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProfileScreen(uid: comment.uid),
+                                      ),
+                                    );
+                                  },
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    backgroundImage:
+                                        NetworkImage(comment.profilePhoto),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 5),
-                              Container(
-                                child: Row(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      tago.format(
-                                          comment.datePublished.toDate()),
-                                      style: TextService.mediumText.copyWith(
-                                        fontSize: 12,
+                                      "${comment.username}  ",
+                                      style: TextService.boldText.copyWith(
+                                        fontSize: 14,
                                         color: Colors.white,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
-                          trailing: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () =>
-                                    commentController.likeComment(comment.id),
-                                child: Icon(
-                                  Icons.favorite,
-                                  size: 25,
-                                  color: comment.likes
-                                          .contains(authController.user.uid)
-                                      ? Colors.red
-                                      : Colors.white,
+                                subtitle: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      comment.comment,
+                                      style: TextService.mediumText.copyWith(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Container(
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            tago.format(
+                                                comment.datePublished.toDate()),
+                                            style:
+                                                TextService.mediumText.copyWith(
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                trailing: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () => commentController
+                                          .likeComment(comment.id),
+                                      child: Icon(
+                                        Icons.favorite,
+                                        size: 25,
+                                        color: comment.likes.contains(
+                                                authController.user.uid)
+                                            ? Colors.red
+                                            : Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      '${comment.likes.length}',
+                                      style: TextService.mediumText.copyWith(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: 5),
-                              Text(
-                                '${comment.likes.length}',
-                                style: TextService.mediumText.copyWith(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                            );
                     },
                   );
                 }),

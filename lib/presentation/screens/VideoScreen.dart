@@ -1,11 +1,196 @@
 part of 'ScreensImport.dart';
 
 class VideoScreen extends StatelessWidget {
-  VideoScreen({super.key});
+  VideoScreen({super.key, required this.uid});
 
+  // Bottom Sheet Comment
+  bottomSheetCommentScreen(BuildContext ctx, String id) {
+    final size = MediaQuery.of(ctx).size;
+    commentController.updatePostId(id);
+    showModalBottomSheet(
+      backgroundColor: Colors.grey[850],
+      context: ctx,
+      builder: (ctx) => Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[850],
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+          child: SizedBox(
+            height: size.height,
+            width: size.width,
+            child: Column(
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.white54,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Expanded(
+                  child: Obx(() {
+                    return ListView.builder(
+                      itemCount: commentController.comments.length,
+                      itemBuilder: (context, index) {
+                        final comment = commentController.comments[index];
+                        return commentController.comments.isEmpty
+                            ? Center(
+                                child: Text(
+                                'Be the first to comment',
+                                style: TextService.boldText.copyWith(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ))
+                            : Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                child: ListTile(
+                                  leading: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProfileScreen(uid: comment.uid),
+                                        ),
+                                      );
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.black,
+                                      backgroundImage:
+                                          NetworkImage(comment.profilePhoto),
+                                    ),
+                                  ),
+                                  title: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${comment.username}  ",
+                                        style: TextService.boldText.copyWith(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  subtitle: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        comment.comment,
+                                        style: TextService.mediumText.copyWith(
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              tago.format(comment.datePublished
+                                                  .toDate()),
+                                              style: TextService.mediumText
+                                                  .copyWith(
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  trailing: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () => commentController
+                                            .likeComment(comment.id),
+                                        child: Icon(
+                                          Icons.favorite,
+                                          size: 25,
+                                          color: comment.likes.contains(
+                                                  authController.user.uid)
+                                              ? Colors.red
+                                              : Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        '${comment.likes.length}',
+                                        style: TextService.mediumText.copyWith(
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                      },
+                    );
+                  }),
+                ),
+                Divider(),
+                Center(
+                  child: ListTile(
+                    title: TextFormField(
+                      controller: _commentController,
+                      style: TextService.mediumText.copyWith(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Comment',
+                        hintStyle: TextService.mediumText.copyWith(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    trailing: TextButton(
+                        onPressed: () => commentController
+                            .postComment(_commentController.text),
+                        child: Text(
+                          'Send',
+                          style: TextService.mediumText.copyWith(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  final String uid;
   final VideoController videoController = Get.put(VideoController());
   final SearchController searchController = Get.put(SearchController());
+  final TextEditingController _commentController = TextEditingController();
+  CommentController commentController = Get.put(CommentController());
 
+  // Widget photo profile
   buildProfile(BuildContext context, String uid, String profilePhoto) {
     return InkWell(
       onTap: () {
@@ -38,7 +223,31 @@ class VideoScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                ))
+                )),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Container(
+            //     height: 25,
+            //     width: 25,
+            //     decoration: BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       color: Colors.white,
+            //     ),
+            //     child: Icon(Icons.done_rounded, color: Colors.red, size: 17),
+            //   ),
+            // ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 25,
+                width: 25,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.red,
+                ),
+                child: Icon(Icons.add, color: Colors.white, size: 17),
+              ),
+            ),
           ],
         ),
       ),
@@ -103,7 +312,7 @@ class VideoScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.only(left: 20, bottom: 15),
+                                padding: EdgeInsets.only(left: 15, bottom: 15),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -111,12 +320,13 @@ class VideoScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(data.username,
-                                        style: TextService.boldText.copyWith()),
-                                    SizedBox(height: 8),
+                                        style: TextService.boldText
+                                            .copyWith(fontSize: 15)),
+                                    SizedBox(height: 4),
                                     Text(data.caption,
-                                        style:
-                                            TextService.mediumText.copyWith()),
-                                    SizedBox(height: 11),
+                                        style: TextService.mediumText
+                                            .copyWith(fontSize: 13)),
+                                    SizedBox(height: 6),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -167,7 +377,7 @@ class VideoScreen extends StatelessWidget {
                                                 .copyWith(
                                                     fontSize: 11,
                                                     fontWeight:
-                                                        FontWeight.w600))
+                                                        FontWeight.w700))
                                       ],
                                     ),
                                     SizedBox(
@@ -176,15 +386,8 @@ class VideoScreen extends StatelessWidget {
                                     Column(
                                       children: [
                                         InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CommentScreen(
-                                                          id: data.id,
-                                                        )));
-                                          },
+                                          onTap: () => bottomSheetCommentScreen(
+                                              context, data.id),
                                           child: Icon(Icons.comment,
                                               size: 35, color: whiteColor),
                                         ),
@@ -196,7 +399,7 @@ class VideoScreen extends StatelessWidget {
                                                 .copyWith(
                                                     fontSize: 11,
                                                     fontWeight:
-                                                        FontWeight.w600))
+                                                        FontWeight.w700))
                                       ],
                                     ),
                                     SizedBox(
@@ -217,7 +420,7 @@ class VideoScreen extends StatelessWidget {
                                                 .copyWith(
                                                     fontSize: 11,
                                                     fontWeight:
-                                                        FontWeight.w600))
+                                                        FontWeight.w700))
                                       ],
                                     ),
                                     SizedBox(
