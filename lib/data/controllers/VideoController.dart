@@ -39,4 +39,16 @@ class VideoController extends GetxController {
       );
     }
   }
+
+  // deleteVideo(String id, String videoFile) {
+  //   firebaseStorage.ref().child(videoFile).delete();
+  //   firestore.collection('videos').doc(id).delete().then((_) {
+  //     Get.snackbar("Success", "Video has been deleted");
+  //   }).catchError((e) {
+  //     Get.snackbar(
+  //       'Error Uploading Video',
+  //       e.toString(),
+  //     );
+  //   });
+  // }
 }

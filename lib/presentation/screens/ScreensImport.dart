@@ -11,6 +11,7 @@ import 'package:timeago/timeago.dart' as tago;
 import 'package:video_player/video_player.dart';
 
 // Import Controller
+import '../../data/controllers/AuthController.dart';
 import '../../data/controllers/UploadVideoController.dart';
 import '../../data/controllers/ProfileController.dart';
 import '../../data/controllers/CommentController.dart';
